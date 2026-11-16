@@ -163,8 +163,6 @@ public class StudentEnrollmentForm extends JFrame {
         resetButton.addActionListener(e -> resetForm());
     }
 
-    // SEARCH STUDENT USING JSONPOWERDB
-
     private void lookupStudent() {
 
         if (lookupInProgress || !rollNoField.isEnabled()) {
@@ -207,7 +205,6 @@ public class StudentEnrollmentForm extends JFrame {
                         ? response.get("message").getAsString()
                         : "Unknown database response";
 
-                // A missing record means this is a new student.
                 if (status == 400 &&
                         message.toLowerCase().contains("not found")) {
 
@@ -219,7 +216,6 @@ public class StudentEnrollmentForm extends JFrame {
                 return;
             }
 
-            // JSONPowerDB returns the actual record inside a JSON string.
             String dataString = response.get("data").getAsString();
 
             if (dataString == null || dataString.isBlank()) {
@@ -230,7 +226,6 @@ public class StudentEnrollmentForm extends JFrame {
             JsonObject data = JsonParser.parseString(dataString)
                     .getAsJsonObject();
 
-            // The actual student information is inside "record".
             if (!data.has("record") || data.get("record").isJsonNull()) {
                 prepareNewStudent();
                 return;
@@ -288,7 +283,6 @@ public class StudentEnrollmentForm extends JFrame {
         fullNameField.requestFocusInWindow();
     }
 
-    // SAVE NEW STUDENT
 
     private void saveStudent() {
 
@@ -326,7 +320,6 @@ public class StudentEnrollmentForm extends JFrame {
         }
     }
 
-    // UPDATE EXISTING STUDENT
 
     private void updateStudent() {
 
@@ -364,7 +357,6 @@ public class StudentEnrollmentForm extends JFrame {
         }
     }
 
-    // CONVERT FORM DATA INTO JSON
 
     private JsonObject createStudentJson(StudentData data) {
 
@@ -382,8 +374,6 @@ public class StudentEnrollmentForm extends JFrame {
 
         return student;
     }
-
-    // FORM VALIDATION
 
     private StudentData readAndValidateForm() {
 
@@ -456,8 +446,6 @@ public class StudentEnrollmentForm extends JFrame {
         }
     }
 
-    // RESET FORM
-
     private void resetForm() {
 
         rollNoField.setText("");
@@ -514,7 +502,6 @@ public class StudentEnrollmentForm extends JFrame {
         );
     }
 
-    // STUDENT DATA MODEL
 
     private static class StudentData {
 

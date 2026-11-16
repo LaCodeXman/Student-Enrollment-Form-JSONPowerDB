@@ -79,7 +79,6 @@ public class JsonPowerDBService {
         }
     }
 
-    // READ: Retrieve a student using Roll Number
     public JsonObject getStudent(int rollNo)
             throws IOException, InterruptedException {
 
@@ -96,7 +95,6 @@ public class JsonPowerDBService {
         return sendRequest("/api/irl", body);
     }
 
-    // CREATE: Insert a new student
     public JsonObject insertStudent(JsonObject student)
             throws IOException, InterruptedException {
 
@@ -113,7 +111,6 @@ public class JsonPowerDBService {
         return sendRequest("/api/iml/set", body);
     }
 
-    // UPDATE: Update an existing student
     public JsonObject updateStudent(JsonObject student)
             throws IOException, InterruptedException {
 
